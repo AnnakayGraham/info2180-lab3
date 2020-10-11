@@ -1,17 +1,12 @@
-
-window.onload = function(){
-   
-    let starter = document.getElementsByClassName("btn");
-    starter.addEventListener("click",()=>{
-    window.location.reload();
+window.addEventListener('DOMContentLoaded', (event) => {
+    let starter=document.getElementsByClassName("btn")[0];
+    starter.addEventListener("click", ()=>{
+        window.location.reload();
     });
-    const x = document.getElementById("board")
-    for(var num = 0; num <x.length; num++){
-        x.foreach(i=>{
-            i.setAttribute("class","square")
-            i.setAttribute("mouse",mouse());
-            i.setAttribute("click",click());
-        })
-    }   
-
-};
+    x=document.getElementById("board");
+    for(let i of x.children){
+        i.setAttribute("class","square");
+        i.setAttribute("mouse",mouse());
+        i.setAttribute("click",click());
+    };
+});
