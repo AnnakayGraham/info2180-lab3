@@ -72,3 +72,25 @@ function displaywinner(){
 
     }
 }
+function check(){
+    let won=false;
+    for(let h=0;h<=7;h++){
+        const winCondition=winningConditions[h];
+        let b=winner[winCondition[0]];
+        let c=winner[winCondition[1]];
+        let d=winner[winCondition[2]];
+        if(b===''||c===''||d===''){
+            continue;
+        }
+        if (b===c&&c===d){
+            won=true;
+            break;
+        }
+    }
+    if(won){
+        displaywinner();
+        game=false;
+        return;
+    }
+
+}
