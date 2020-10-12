@@ -54,3 +54,21 @@ function click(){
     }
 }
 
+function displaywinner(){
+    let p=document.getElementById("status");
+    let b=document.getElementById("board");
+    if(a%2==0){
+        p.innerHTML="Congratulations! X is the winner!";
+        p.classList.add("status","you-won");
+        for(let i of x.children){
+            i.removeAttribute("click");
+        }
+    } else if(a%2==1){
+        p.innerHTML="Congratulations! O is the winner!";
+        p.classList.add("status","you-won");
+        for(let i of x.children){
+            i.removeAttribute("click");
+        }
+
+    }
+}
