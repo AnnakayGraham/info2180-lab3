@@ -1,5 +1,5 @@
 
-let t=0;
+let count=0;
 let s;
 let game=true;
 winner=["", "", "", "", "", "", "", "", ""];
@@ -14,12 +14,12 @@ const winningConditions = [
     [2, 4, 6]
 ];
 window.onload= function(){
-    let newG=document.getElementsByClassName("btn")[0];
-    newG.addEventListener("click", ()=>{
+    let starter=document.getElementsByClassName("btn")[0];
+    starter.addEventListener("click", ()=>{
         window.location.reload();
     });
-    s=document.getElementById("board");
-    for(let i of s.children){
+    x=document.getElementById("board");
+    for(let i of x.children){
         i.setAttribute("class","square");
         i.setAttribute("mouse",mouse());
         i.setAttribute("click",click());
@@ -40,18 +40,18 @@ function click(){
     for(let [index, i] of children.entries()){
         i.onclick=function(){
             if(game) {
-                if (t%2===0 && i.innerHTML ===""){
+                if (count%2===0 && i.innerHTML ===""){
                     i.innerHTML="X";
                     i.classList.add("square","X");
                     winner[index] = "X";
                     check();
-                    t+=1;
+                    count+=1;
                 } else if(t%2===1 && i.innerHTML===""){
                     i.innerHTML="O";
                     i.classList.add("square","O");
                     winner[index] = "O";
                     check();
-                    t+=1;
+                    count+=1;
                 }
             }
         }
@@ -59,11 +59,11 @@ function click(){
 }
 
 function displaywinner(){
-    let p=document.getElementById("status");
-    let b=document.getElementById("board");
-    if(t%2==0){
-        p.innerHTML="Congratulations! X is the winner!";
-        p.classList.add("status","you-won");
+    let w=document.getElementById("status");
+    let y=document.getElementById("board");
+    if(count%2==0){
+        w.innerHTML="Congratulations! X is the winner!";
+        w.classList.add("status","you-won");
         for(let i of s.children){
             i.removeAttribute("click");
         }
@@ -78,7 +78,7 @@ function displaywinner(){
 }
 function check(){
     let won=false;
-    for(let h=0;h<=7;h++){
+    for(let c=0;c<=7;c++){
         const winCondition=winningConditions[h];
         let a=winner[winCondition[0]];
         let b=winner[winCondition[1]];
