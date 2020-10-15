@@ -1,7 +1,8 @@
-let a=0;
-let x;
+
+let t=0;
+let s;
 let game=true;
-winner=[]
+winner=["", "", "", "", "", "", "", "", ""];
 const winningConditions = [
     [0, 1, 2],
     [3, 4, 5],
@@ -13,12 +14,12 @@ const winningConditions = [
     [2, 4, 6]
 ];
 window.onload= function(){
-    let starter=document.getElementsByClassName("btn")[0];
-    starter.addEventListener("click", ()=>{
+    let newG=document.getElementsByClassName("btn")[0];
+    newG.addEventListener("click", ()=>{
         window.location.reload();
     });
-    x=document.getElementById("board");
-    for(let i of x.children){
+    s=document.getElementById("board");
+    for(let i of s.children){
         i.setAttribute("class","square");
         i.setAttribute("mouse",mouse());
         i.setAttribute("click",click());
@@ -35,20 +36,23 @@ mouse=function(){
 }
         
 function click(){
-    for(let i of x.children){
+    var children = Array.prototype.slice.call(s.children)
+    for(let [index, i] of children.entries()){
         i.onclick=function(){
-            if (a%2===0 && i.innerHTML ===""){
-                i.innerHTML="X";
-                i.classList.add("square","X");
-                winner.push(i);
-                check();
-                a+=1;
-            } else if(a%2===1 && i.innerHTML===""){
-                i.innerHTML="O";
-                i.classList.add("square","O");
-                winner.push(i);
-                check();
-                a+=1;
+            if(game) {
+                if (t%2===0 && i.innerHTML ===""){
+                    i.innerHTML="X";
+                    i.classList.add("square","X");
+                    winner[index] = "X";
+                    check();
+                    t+=1;
+                } else if(t%2===1 && i.innerHTML===""){
+                    i.innerHTML="O";
+                    i.classList.add("square","O");
+                    winner[index] = "O";
+                    check();
+                    t+=1;
+                }
             }
         }
     }
@@ -57,16 +61,16 @@ function click(){
 function displaywinner(){
     let p=document.getElementById("status");
     let b=document.getElementById("board");
-    if(a%2==0){
+    if(t%2==0){
         p.innerHTML="Congratulations! X is the winner!";
         p.classList.add("status","you-won");
-        for(let i of x.children){
+        for(let i of s.children){
             i.removeAttribute("click");
         }
-    } else if(a%2==1){
+    } else if(t%2==1){
         p.innerHTML="Congratulations! O is the winner!";
         p.classList.add("status","you-won");
-        for(let i of x.children){
+        for(let i of s.children){
             i.removeAttribute("click");
         }
 
@@ -76,13 +80,13 @@ function check(){
     let won=false;
     for(let h=0;h<=7;h++){
         const winCondition=winningConditions[h];
-        let b=winner[winCondition[0]];
-        let c=winner[winCondition[1]];
-        let d=winner[winCondition[2]];
-        if(b===''||c===''||d===''){
+        let a=winner[winCondition[0]];
+        let b=winner[winCondition[1]];
+        let c=winner[winCondition[2]];
+        if(a===''||b===''||c===''){
             continue;
         }
-        if (b===c&&c===d){
+        if (a===b&&b===c){
             won=true;
             break;
         }
