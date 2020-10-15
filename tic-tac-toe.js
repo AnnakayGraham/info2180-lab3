@@ -36,7 +36,7 @@ mouse=function(){
 }
         
 function click(){
-    var children = Array.prototype.slice.call(s.children)
+    var children = Array.prototype.slice.call(x.children)
     for(let [index, i] of children.entries()){
         i.onclick=function(){
             if(game) {
@@ -46,7 +46,7 @@ function click(){
                     winner[index] = "X";
                     check();
                     count+=1;
-                } else if(t%2===1 && i.innerHTML===""){
+                } else if(count%2===1 && i.innerHTML===""){
                     i.innerHTML="O";
                     i.classList.add("square","O");
                     winner[index] = "O";
@@ -64,13 +64,13 @@ function displaywinner(){
     if(count%2==0){
         w.innerHTML="Congratulations! X is the winner!";
         w.classList.add("status","you-won");
-        for(let i of s.children){
+        for(let i of x.children){
             i.removeAttribute("click");
         }
-    } else if(t%2==1){
-        p.innerHTML="Congratulations! O is the winner!";
-        p.classList.add("status","you-won");
-        for(let i of s.children){
+    } else if(count%2==1){
+        w.innerHTML="Congratulations! O is the winner!";
+        w.classList.add("status","you-won");
+        for(let i of x.children){
             i.removeAttribute("click");
         }
 
@@ -78,8 +78,8 @@ function displaywinner(){
 }
 function check(){
     let won=false;
-    for(let c=0;c<=7;c++){
-        const winCondition=winningConditions[h];
+    for(let counter=0;counter<=7;counter++){
+        const winCondition=winningConditions[counter];
         let a=winner[winCondition[0]];
         let b=winner[winCondition[1]];
         let c=winner[winCondition[2]];
